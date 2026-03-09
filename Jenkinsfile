@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        PATH = "/usr/local/bin:/opt/homebrew/bin:${env.PATH}"
         DOCKER_IMAGE = 'devhong/plant-house'
         DOCKER_TAG = "${BUILD_NUMBER}"
         APP_EC2_IP = '43.202.63.50'
