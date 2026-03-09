@@ -26,8 +26,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh "docker login -u $DOCKER_USER -p $DOCKER_PASS"
-                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
-                    sh "docker build -t ${DOCKER_IMAGE}:latest ."
+                    sh "docker build --platform linux/amd64 -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                    sh "docker build --platform linux/amd64 -t ${DOCKER_IMAGE}:latest ."
                     sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
                     sh "docker push ${DOCKER_IMAGE}:latest"
                 }
