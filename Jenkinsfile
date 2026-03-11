@@ -49,10 +49,7 @@ pipeline {
                 sshagent(['app-ec2-key']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no ec2-user@${APP_EC2_IP} '
-                            docker pull ${DOCKER_IMAGE}:${params.DEPLOY_TAG}
-                            docker stop my-app || true
-                            docker rm my-app || true
-                            docker run -d --name my-app --env-file ~/.env.docker -p 8080:8080 ${DOCKER_IMAGE}:${params.DEPLOY_TAG}
+                            ~/deploy.sh ${params.DEPLOY_TAG}
                         '
                     """
                 }
